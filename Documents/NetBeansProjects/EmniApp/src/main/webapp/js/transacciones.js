@@ -1,35 +1,31 @@
-$(document).ready(function() {
-   $('#transacciones').DataTable( {
-        "ajax": "http://localhost:8080/EmniApp/rest/transaccion",
-        "columns": [
-            { "data": "nroTransaccion" },
-            { "data": "fechaTransaccion" },
-            { "data": "monto" },
-            { "data": "descripcion" }
-        ]
-  } );
-} );
 
-$(document).ready(function(){
+$(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:8080/EmniApp/rest/transaccion'
-    }).done(function(data){
-        $.each(data, function(i, item) {
-            $("#transaccioness").append('<li style="padding:0.1rem;">'+ '<button type="button" class="btn btn-default" onclick="datosTransaccion('+item['nroTransaccion']+')">Ver</button>'+ '&nbsp;&nbsp;&nbsp;' +item['nroTransaccion']+'</li>');
-        });
+
+    url: 'http://localhost:8080/EmniApp/rest/transaccion',
+    method: 'get',
+    dataType: 'json',
+    success: function (data){
+
+    $('#transacciones').DataTable( {
+            dom: 'Bfrtip',  
+            buttons: [
+                'csv','pdf'
+            ],   
+            data: data,                         
+            columns: [
+
+                { "data": "nroTransaccion" },
+                { "data": "fechaTransaccion" },
+                { "data": "monto" },
+                { "data": "descripcion" }
+                    ]
+                }); 
+        }
     });
 });
 
-function datosTransaccion(nroTransaccion){
-    $.ajax({
-        url: 'http://localhost:8080/EmniApp/rest/transaccion/'+nroTransaccion
-    }).done(function(data){
-        $("#nroTrans").text(data['nroTransaccion']);
-        $("#monto").text(data['monto']);
-        $("#fechaTransaccion").text(data['fechaTransaccion']);
-        $("#descripcion").text(data['descripcion']);
-    });
-}
+
 
 $(document).ready(function(){
     $("#enviarTransferencia").click(function(x){
@@ -38,7 +34,7 @@ $(document).ready(function(){
         let formatted_date = current_datetime.getFullYear() + "-" + appendLeadingZeroes(current_datetime.getMonth() + 1) + "-" + appendLeadingZeroes(current_datetime.getDate()) + "T03:00:00Z[UTC]";
 
 
-        let monto = $("#cargaroMonto").val();
+        let monto = $("#cargarMonto").val();
         let descripcion = $("#cargarDesc").val();
         let fechaDeposito = formatted_date;
 
