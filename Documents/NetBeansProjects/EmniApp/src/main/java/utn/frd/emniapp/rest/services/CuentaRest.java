@@ -46,7 +46,7 @@ public class CuentaRest {
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/{id}")
-    public void edit(@PathParam("id")long id, Cuenta cuenta){
+    public void edit(@PathParam("id")int id, Cuenta cuenta){
         ejbCuentaFacade.edit(cuenta);
     }
     
@@ -54,7 +54,7 @@ public class CuentaRest {
     @DELETE
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Path("/{id}")
-    public void remove(@PathParam("id")long id){
+    public void remove(@PathParam("id")int id){
         ejbCuentaFacade.remove( ejbCuentaFacade.find(id) );
     }
     
@@ -62,7 +62,7 @@ public class CuentaRest {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Cuenta findById(@PathParam("id")long id){
+    public Cuenta findById(@PathParam("id")int id){
         return ejbCuentaFacade.find(id);
     }
 }

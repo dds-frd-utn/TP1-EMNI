@@ -46,7 +46,7 @@ public class BonoRest {
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/{id}")
-    public void edit(@PathParam("id")long id, Bono bono){
+    public void edit(@PathParam("id")int id, Bono bono){
         ejbBonoFacade.edit(bono);
     }
     
@@ -54,7 +54,7 @@ public class BonoRest {
     @DELETE
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Path("/{id}")
-    public void remove(@PathParam("id")long id){
+    public void remove(@PathParam("id")int id){
         ejbBonoFacade.remove( ejbBonoFacade.find(id) );
     }
     
@@ -62,7 +62,7 @@ public class BonoRest {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Bono findById(@PathParam("id")long id){
+    public Bono findById(@PathParam("id")int id){
         return ejbBonoFacade.find(id);
     }
 }

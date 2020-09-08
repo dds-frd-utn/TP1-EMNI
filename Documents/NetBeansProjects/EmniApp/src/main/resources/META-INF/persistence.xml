@@ -3,9 +3,11 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="my_persistence_unit">
     <class>utn.frd.emniapp.entity.Cliente</class>
-    <jta-data-source>jdbc/emnids</jta-data-source>
+    <jta-data-source>jdbc/emni</jta-data-source>
     <class>utn.frd.emniapp.entity.Bono</class>
     <class>utn.frd.emniapp.entity.Cuenta</class>
     <class>utn.frd.emniapp.entity.Transaccion</class>
   </persistence-unit>
+  
 </persistence>
+

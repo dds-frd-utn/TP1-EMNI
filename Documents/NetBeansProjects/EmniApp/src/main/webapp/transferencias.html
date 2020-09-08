@@ -16,11 +16,9 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  
-  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
   
 </head>
 <body class="hold-transition sidebar-mini">
@@ -117,16 +115,7 @@
 
       </div>
           
-      <script type="text/javascript">
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:8080/EmniApp/rest/transaccion',
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data)
-                }
-            });
-        </script>
+      
          
       <div class="row">
             <div class="col">
@@ -138,24 +127,24 @@
                 </div>
                 <div class="row">             
                     <div class="col">
-                        <div class="card text-white bg-success mb-3" style="width: 30rem;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);height: 23rem;">
+                        <div class="card text-white mb-3" style="width: 30rem;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);height: 23rem;">
                             <h2>Detalle de las transacciones:</h2>
                             <div class="row">
-                                <p style="margin-left: 1rem;">Número de Transacción: &nbsp;</p>
-                                <p id="nroTrans"></p>
+                                <p style="color:black; margin-left: 1rem;">Número de Transacción: &nbsp;</p>
+                                <p style="color:black" id="nroTrans"></p>
                             </div>
                             <div class="row">
-                                <p style="margin-left: 1rem;">Monto: &nbsp;</p>
-                                <p id="monto"></p>
-                                <p style="margin-right: 1rem;">&nbsp;$ARS</p>
+                                <p style="color:black; margin-left: 1rem;">Monto: &nbsp;</p>
+                                <p style="color:black" id="monto"></p>
+                                <p style="color:black; margin-right: 1rem;">&nbsp;$ARS</p>
                             </div>
                             <div class="row">
-                                <p style="margin-left: 1rem;">Fecha: &nbsp;</p>
-                                <p id="fecha"></p>
+                                <p style="color:black; margin-left: 1rem;">Fecha: &nbsp;</p>
+                                <p style="color:black" id="fechaTransaccion"></p>
                             </div>
                             <div class="row">
-                                <p style="margin-left: 1rem;">Descripción &nbsp;</p>
-                                <p id="descripcion"></p>
+                                <p style="color:black; margin-left: 1rem;">Descripción &nbsp;</p>
+                                <p style="color:black" id="descripcion"></p>
                             </div>
                         </div>
                     </div>
@@ -201,8 +190,10 @@ VENTANA MODAL
         <div class="modal-body">
 
           <div class="card-body">
+              
 
-            <!-- Campo para el nombre -->
+
+            <!-- Campo para el monto -->
 
             <div class="form-group">
               
@@ -210,13 +201,13 @@ VENTANA MODAL
                 
                 <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoMonto" placeholder="Ingresar monto" required>
+                <input type="text" class="form-control input-lg" id="cargaroMonto" name="nuevoMonto" placeholder="Ingresar monto" required>
 
               </div>
 
             </div>
 
-            <!-- Campo para el usuario -->
+            <!-- Campo para descripcion -->
 
             <div class="form-group">
               
@@ -224,7 +215,7 @@ VENTANA MODAL
                 
                 <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoDesc" placeholder="Descripción">
+                <input type="text" class="form-control input-lg" id="cargarDesc" name="nuevoDesc" placeholder="Descripción">
 
               </div>
 
@@ -243,7 +234,7 @@ VENTANA MODAL
 
           <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Completar</button>
+          <button type="submit" class="btn btn-primary" id="enviarTransferencia">Completar</button>
 
         </div>
 
@@ -270,8 +261,9 @@ VENTANA MODAL
   </aside>
 
 </div>
+  
 
-
+  
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -283,6 +275,16 @@ VENTANA MODAL
 
 <script src="js/transacciones.js"></script>
 
+    <script type="text/javascript">
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8080/EmniApp/rest/transaccion',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+       </script>
 
 </body>
 </html>
