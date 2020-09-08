@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>BANCO EMNI | Menú</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  
+</head>
+<body class="hold-transition sidebar-mini">
+
+<div class="wrapper">
+
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item dropdown user-menu">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+          <span class="d-none d-md-inline">Elton TARDO</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+           <li>
+            <a href="#" class="btn btn-default btn-flat float-right">Salir</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+    <a href="cuenta.html" class="brand-link">
+      <span class="brand-text font-weight-light">BANCO EMNI</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          
+          
+         <li class="nav-item">
+                <a href="cuenta.html" class="nav-link">
+                  <i class="nav-icon fa fa-home"></i>
+                  <p>Inicio</p>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a href="transferencias.html" class="nav-link">
+                  <i class="fas fa-exchange-alt"></i>
+                  <p>Transferencias</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="bonos.html" class="nav-link">
+                  <i class="fas fa-money-check-alt"></i>
+                  <p>Bonos</p>
+                </a>
+              </li>
+          
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+        
+      <div class="card">
+
+      <div class="card-header">
+
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalGenerarTransaccion">
+          Generar transacción
+        </button>
+
+      </div>
+
+      <div class="card-body">
+        
+        <table id="transacciones" class="table table-bordered table-striped dt-responsive tablas" width="100%">
+
+          <thead>
+            <tr>
+                <th>#</th>
+                <th>Fecha</th>
+                <th>Monto</th>
+                <th>Descripción</th>
+            </tr>
+          </thead>         
+        </table>
+
+      </div>
+          
+      <script type="text/javascript">
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8080/EmniApp/rest/transaccion',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data)
+                }
+            });
+        </script>
+         
+      <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <ul id="transaccioness">
+                        </ul>                        
+                    </div>
+                </div>
+                <div class="row">             
+                    <div class="col">
+                        <div class="card text-white bg-success mb-3" style="width: 30rem;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);height: 23rem;">
+                            <h2>Detalle de las transacciones:</h2>
+                            <div class="row">
+                                <p style="margin-left: 1rem;">Número de Transacción: &nbsp;</p>
+                                <p id="nroTrans"></p>
+                            </div>
+                            <div class="row">
+                                <p style="margin-left: 1rem;">Monto: &nbsp;</p>
+                                <p id="monto"></p>
+                                <p style="margin-right: 1rem;">&nbsp;$ARS</p>
+                            </div>
+                            <div class="row">
+                                <p style="margin-left: 1rem;">Fecha: &nbsp;</p>
+                                <p id="fecha"></p>
+                            </div>
+                            <div class="row">
+                                <p style="margin-left: 1rem;">Descripción &nbsp;</p>
+                                <p id="descripcion"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+  </div>
+  
+  <!-- =============================================
+VENTANA MODAL
+=============================================-->
+
+<div class="modal fade" id="modalGenerarTransaccion">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" enctype="multipart/form-data">
+
+        <!-- =============================================
+        HEAD MODAL
+        =============================================-->
+
+        <div class="modal-header" style="background:#007bff; color:white ">
+
+          <h4 class="modal-title">Transacción</h4>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+            <span aria-hidden="true">&times;</span>
+
+          </button>
+
+        </div>
+
+        <!-- =============================================
+        CUERPO MODAL
+        =============================================-->
+
+        <div class="modal-body">
+
+          <div class="card-body">
+
+            <!-- Campo para el nombre -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevoMonto" placeholder="Ingresar monto" required>
+
+              </div>
+
+            </div>
+
+            <!-- Campo para el usuario -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevoDesc" placeholder="Descripción">
+
+              </div>
+
+            </div>
+
+            
+          </div>
+
+        </div>
+
+        <!-- =============================================
+        FOOTER MODAL
+        =============================================-->
+
+        <div class="modal-footer justify-content-between">
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Completar</button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div> 
+
+</div>
+
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.5
+    </div>
+    <strong>Copyright &copy; 2020 EMNI.</strong> All rights
+    reserved.
+  </footer>
+
+
+  <aside class="control-sidebar control-sidebar-dark">
+
+  </aside>
+
+</div>
+
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+
+<script src="js/transacciones.js"></script>
+
+
+</body>
+</html>
